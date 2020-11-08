@@ -1,104 +1,160 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title> Home Page :^) </title>
-        <style>
-            :root {
-                --color1: black;
-                --color2: red;
-                --color3: green;
-                --color4: blue;
-            }
 
-            .band-1 {
-                position: absolute;
-                top: 184px;
-                left: 300px;
-            }
+<head>
+    <title> Resistance Calculator </title>
+    <style>
+        :root {
+            --color1: black;
+            --color2: red;
+            --color3: green;
+            --color4: blue;
+        }
 
-            .band-2 {
-                position: absolute;
-                top: 190px;
-                left: 335px;
-            }
+        .band-1 {
+            position: absolute;
+            top: 184px;
+            left: 300px;
+        }
 
-            .band-3 {
-                position: absolute;
-                top: 194px;
-                left: 370px;
-            }
+        .band-2 {
+            position: absolute;
+            top: 190px;
+            left: 335px;
+        }
 
-            .band-4 {
-                position: absolute;
-                top: 185px;
-                left: 463px;
-            }
+        .band-3 {
+            position: absolute;
+            top: 194px;
+            left: 370px;
+        }
 
-            #band-1 {
-                fill: var(--color1);
-            }
-            #band-2 {
-                fill: var(--color2);
-            }
-            #band-3 {
-                fill: var(--color3);
-            }
-            #band-4 {
-                fill: var(--color4);
-            }
-        </style>
-        <script>
-            function band1(bandnum) {
-                var color = document.getElementById("dd" + bandnum).value;
-                document.documentElement.style.setProperty('--color' + bandnum, color);
-            }
-        </script>
-    </head>
-    <body>
-        <h1> Drop Down Test </h1>
-        <p> peace up, a-town bu bu bubu bu bu bubu (usher usher usher) let's go! yeah yeah yeah, yeah yeah yeah, yeah!</p>
-        
-        <img src = "{{url_for('static', filename = 'resistor.png')}}" align = "middle" />
+        .band-4 {
+            position: absolute;
+            top: 185px;
+            left: 463px;
+        }
 
-        <!--Band 1-->
-        <select id="dd1" name = colours method = "GET" action="/" onchange="band1(1)">               
-            {% for colour in colours %}
-            <option value = "{{colour}}" SELECTED>{{colour}}</option>
-            {% endfor %}
-        </select>
-        
-        <!--Band 2-->
-        <select id="dd2" name = colours method = "GET" action="/" onchange="band1(2)">               
-            {% for colour in colours %}
-            <option value = "{{colour}}" SELECTED>{{colour}}</option>
-            {% endfor %}
-        </select>
+        #band-1 {
+            fill: var(--color1);
+        }
 
-        <!--Band 3-->
-        <select id="dd3" name = colours method = "GET" action="/" onchange="band1(3)"> 
-            {% for colour in colours %}
-            <option value = "{{colour}}" SELECTED>{{colour}}</option>
-            {% endfor %}
-        </select>
+        #band-2 {
+            fill: var(--color2);
+        }
 
-        <!--Band 4-->
-        <select id="dd4" name = colours method = "GET" action="/" onchange="band1(4)"> 
-            {% for colour in colours %}
-            <option value = "{{colour}}" SELECTED>{{colour}}</option>
-            {% endfor %}
-        </select>
+        #band-3 {
+            fill: var(--color3);
+        }
 
-        <svg class="band-1" width="27" height="107">
-            <rect id="band-1" width="50" height="110"/>
-        </svg>
-        <svg class="band-2" width="27" height="95">
-            <rect id="band-2" width="50" height="100"/>
-        </svg>
-        <svg class="band-3" width="27" height="86">
-            <rect id="band-3" width="50" height="100"/>
-        </svg>
-        <svg class="band-4" width="27" height="110">
-            <rect id="band-4" width="50" height="104"/>
-        </svg>
-    </body>
+        #band-4 {
+            fill: var(--color4);
+        }
+
+        #ddmenus {
+            position: absolute;
+            left: 12%;
+        }
+
+        #title {
+            padding-left: 11%;
+        }
+
+        #peaceup {
+            padding-left: 18%;
+        }
+    </style>
+
+    <script src="Calculations.js"></script>
+</head>
+
+<body onload="RTCalc(1); RTCalc(2); RTCalc(3); RTCalc(4)">
+
+    <h1 id="title"> Resistance Calculator</h1>
+    <p id="peaceup"> peace up, a-town bu bu bubu bu bu bubu (usher usher usher) let's go! yeah yeah yeah, yeah yeah yeah, yeah!</p>
+
+    <img src="../static/resistor.png" />
+
+    <br>
+
+    <!--Band 1-->
+    <div id="ddmenus">
+    <select id="dd1" name=colours method="GET" action="/" onchange="RTCalc(1)">
+        {% for colour in colours %}
+        <option value="Black" selected>Black</option>
+        <option value="Brown" >Brown</option>
+        <option value="Red" >Red</option>
+        <option value="Orange" >Orange</option>
+        <option value="Yellow" >Yellow</option>
+        <option value="Green" >Green</option>
+        <option value="Blue" >Blue</option>
+        <option value="Purple" >Purple</option>
+        <option value="Grey" >Grey</option>
+        <option value="White" >White</option>
+        {% endfor %}
+    </select>
+
+    <!--Band 2-->
+    <select id="dd2" name=colours method="GET" action="/" onchange="RTCalc(2)">
+        {% for colour in colours %}
+        <option value="Black" selected>Black</option>
+        <option value="Brown" >Brown</option>
+        <option value="Red" >Red</option>
+        <option value="Orange" >Orange</option>
+        <option value="Yellow" >Yellow</option>
+        <option value="Green" >Green</option>
+        <option value="Blue" >Blue</option>
+        <option value="Purple" >Purple</option>
+        <option value="Grey" >Grey</option>
+        <option value="White" >White</option>
+        {% endfor %}
+    </select>
+
+    <!--Band 3-->
+    <select id="dd3" name=colours method="GET" action="/" onchange="RTCalc(3)">
+        {% for colour in colours %}
+        <option value="Black" selected>Black</option>
+        <option value="Brown" >Brown</option>
+        <option value="Red" >Red</option>
+        <option value="Orange" >Orange</option>
+        <option value="Yellow" >Yellow</option>
+        <option value="Green" >Green</option>
+        <option value="Blue" >Blue</option>
+        <option value="Purple" >Purple</option>
+        <option value="Grey" >Grey</option>
+        <option value="White" >White</option>
+        <option value="Gold" >Gold</option>
+        <option value="Silver" >Silver</option>
+        {% endfor %}
+    </select>
+
+    <!--Band 4-->
+    <select id="dd4" name=colours method="GET" action="/" onchange="RTCalc(4)">
+        {% for colour in colours %}
+        <option value="Brown" selected>Brown</option>
+        <option value="Red" >Red</option>
+        <option value="Green" >Green</option>
+        <option value="Blue" >Blue</option>
+        <option value="Purple" >Purple</option>
+        <option value="Grey" >Grey</option>
+        <option value="Gold" >Gold</option>
+        <option value="Silver" >Silver</option>
+        {% endfor %}
+    </select>
+    </div>
+
+    <svg class="band-1" width="27" height="107">
+        <rect id="band-1" width="50" height="110" />
+    </svg>
+    <svg class="band-2" width="27" height="95">
+        <rect id="band-2" width="50" height="100" />
+    </svg>
+    <svg class="band-3" width="27" height="86">
+        <rect id="band-3" width="50" height="100" />
+    </svg>
+    <svg class="band-4" width="27" height="110">
+        <rect id="band-4" width="50" height="104" />
+    </svg>
+</body>
+
 </html>
